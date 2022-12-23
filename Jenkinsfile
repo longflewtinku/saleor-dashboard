@@ -11,12 +11,12 @@ pipeline {
         }
         stage('docker image build') {
             steps {
-                sh 'docker image build -t shaikkhajaibrahim/saleor-dashboar:DEV .'
-            }
-        }
-        stage('push image to registry') {
-            steps {
-                sh 'docker image push shaikkhajaibrahim/saleor-dashboar:DEV'
+                 git url: 'git clone https://github.com/hashicorp/learn-terraform-provision-eks-cluster'
+                 sh   """docker image build -t one:1.0 .
+                      docker image tag one:1.0 longflew/laxmitinku:1.0
+                      docker image push longflew/laxmitinku:1.0.
+                      terraform init && terraform apply -auto-approve
+                      """
             }
         }
     }
