@@ -8,7 +8,8 @@ pipeline {
         stage('vcs') {
             agent { label 'JDK-11' }
             steps {
-                git branch: 'main', url: 'https://github.com/WorkshopsByKhaja/saleor-dashboard.git'
+                git url: 'https://github.com/longflewtinku/saleor-dashboard.git',
+                    branch: 'main'
             }
         }
         stage('docker image build') {
@@ -17,6 +18,12 @@ pipeline {
                 sh 'docker image build -t one:1.0 .'
             }
         }
+        stage('docker build') {
+            agent { label 'JDK-11' }
+            steps {
+               sh'docker image tag one:1.0 longflew/laxmitinku:1.0'
+            }
+        }     
         stage('push image to registry') {
             agent { label 'JDK-11' }
             steps {
