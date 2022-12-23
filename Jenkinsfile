@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent { label 'JDK-11'}
     triggers {
         pollSCM('* * * * *')
     }
